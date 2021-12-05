@@ -41,6 +41,10 @@ class LocalTime implements Comparable<LocalTime> {
 
   static const String _munArgumentError = 'Only one subsecond argument allowed.';
 
+  factory LocalTime.dateTime(DateTime dateTime) {
+    return LocalTime(dateTime.hour,dateTime.minute,dateTime.second);
+  }
+
   /// Creates a local time at the given hour, minute, second and
   /// millisecond or microseconds or nanoseconds within the second.
   ///
@@ -60,6 +64,7 @@ class LocalTime implements Comparable<LocalTime> {
   /// [second] will become optional, like this:
   /// `(int hour, int minute, [int second], {int ms, int us, int ns})`.
   /// The is a planned backwards compatible public API change.
+  ///
   factory LocalTime(int hour, int minute, int second, {int? ms, int? us, int? ns}) {
     // Avoid the method calls which give a decent exception unless we're actually going to fail.
     if (hour < 0 || hour >= TimeConstants.hoursPerDay ||
